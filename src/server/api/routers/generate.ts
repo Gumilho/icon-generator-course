@@ -62,7 +62,7 @@ export const generateRouter = createTRPCRouter({
 
       await s3
         .putObject({
-          Bucket: "icon-generator-course-gumi",
+          Bucket: env.AWS_BUCKET,
           Body: Buffer.from(base64EncodedImage, "base64"),
           Key: icon.id,
           ContentEncoding: "base64",
@@ -70,7 +70,7 @@ export const generateRouter = createTRPCRouter({
         })
         .promise();
       return {
-        b64Image: base64EncodedImage,
+        imageUrl: `https://${env.AWS_BUCKET}.s3.amazonaws.com/${icon.id}`,
       };
     }),
 });

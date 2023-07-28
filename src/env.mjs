@@ -24,6 +24,7 @@ const server = z.object({
   MOCK_DALLE: z.string(),
   AWS_ACCESS_KEY_ID: z.string(),
   AWS_SECRET_ACCESS_KEY: z.string(),
+  AWS_BUCKET: z.string(),
 });
 
 /**
@@ -50,6 +51,7 @@ const processEnv = {
   MOCK_DALLE: process.env.MOCK_DALLE,
   AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
   AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+  AWS_BUCKET: process.env.AWS_BUCKET,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 

@@ -31,7 +31,7 @@ const GeneratePage: NextPage = () => {
     generateIcon
       .mutateAsync(form)
       .then((data) => {
-        setImageUrl(data.b64Image);
+        setImageUrl(data.imageUrl);
       })
       .finally(() => {
         setForm({ prompt: "" });
@@ -61,12 +61,7 @@ const GeneratePage: NextPage = () => {
           <Button>Submit</Button>
         </form>
         {imageUrl && (
-          <Image
-            src={`data:image/png;base64,${imageUrl}`}
-            alt={form.prompt}
-            width={100}
-            height={100}
-          />
+          <Image src={imageUrl} alt={form.prompt} width={100} height={100} />
         )}
       </main>
     </>

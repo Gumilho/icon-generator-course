@@ -11,7 +11,7 @@ const config = {
   reactStrictMode: true,
 
   images: {
-    domains: ["lh3.googleusercontent.com"],
+    domains: ["icon-generator-course-gumi.s3.amazonaws.com"],
   },
   /**
    * If you have the "experimental: { appDir: true }" setting enabled, then you
