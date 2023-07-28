@@ -1,6 +1,7 @@
 import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
+import Image from "next/image";
 import { useState } from "react";
 import Button from "~/components/Button";
 import FormGroup from "~/components/FormGroup";
@@ -11,6 +12,7 @@ const GeneratePage: NextPage = () => {
   const [form, setForm] = useState({
     prompt: "",
   });
+  const [imageUrl, setImageUrl] = useState<string>();
   const session = useSession();
   const isLoggedIn = !!session.data;
   const generateIcon = api.generate.generateIcon.useMutation();
@@ -26,9 +28,14 @@ const GeneratePage: NextPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    generateIcon.mutateAsync(form).then((data) => {
-      console.log(data.message);
-    });
+    generateIcon
+      .mutateAsync(form)
+      .then((data) => {
+        setImageUrl(data.b64Image);
+      })
+      .finally(() => {
+        setForm({ prompt: "" });
+      });
   };
 
   return (
@@ -53,6 +60,14 @@ const GeneratePage: NextPage = () => {
           </FormGroup>
           <Button>Submit</Button>
         </form>
+        {imageUrl && (
+          <Image
+            src={`data:image/png;base64,${imageUrl}`}
+            alt={form.prompt}
+            width={100}
+            height={100}
+          />
+        )}
       </main>
     </>
   );
